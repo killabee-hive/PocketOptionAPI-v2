@@ -95,7 +95,8 @@ class WebsocketClient(object):
                     }
 
                     # Check if websockets version supports additional_headers
-                    if hasattr(websockets.client.connect, "__defaults__") and "additional_headers" in websockets.client.connect.__annotations__:
+                    #if hasattr(websockets.client.connect, "__defaults__") and "additional_headers" in websockets.client.connect.__annotations__:
+                    if tuple(int(x) for x in websockets.__version__.split(".")[:2]) >= (10, 1):    
                         connect_kwargs["additional_headers"] = {
                             "Origin": "https://pocketoption.com",
                             "Cache-Control": "no-cache",
